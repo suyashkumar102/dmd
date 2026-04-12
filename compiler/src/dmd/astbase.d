@@ -5684,6 +5684,7 @@ struct ASTBase
     extern (C++) final class CommaExp : BinExp
     {
         const bool isGenerated;
+        bool isInlineSequence;
         bool allowCommaExp;
 
         extern (D) this(Loc loc, Expression e1, Expression e2, bool generated = true)
