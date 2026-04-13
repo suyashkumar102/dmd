@@ -2355,7 +2355,7 @@ private void expandInline(CallExp ecall, FuncDeclaration fd, FuncDeclaration par
             ids.from.push(vfrom);
             ids.to.push(vto);
 
-            auto de = new DeclarationExp(vto.loc, vto);
+            auto de = new DeclarationExp(Loc.initial, vto);
             de.type = Type.tvoid;
             eparams = Expression.combine(eparams, de);
 

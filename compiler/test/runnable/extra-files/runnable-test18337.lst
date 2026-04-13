@@ -6,14 +6,14 @@
        |extern(C) void dmd_coverDestPath(string path);
        |
        |pragma(inline, true)
-      2|int square(int x)
+       |int square(int x)
        |{
       2|    int y = x * x;
       2|    return y;
        |}
        |
        |pragma(inline, true)
-      2|int addSquares(int a, int b)
+       |int addSquares(int a, int b)
        |{
       1|    return square(a) + square(b);
        |}
