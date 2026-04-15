@@ -3258,7 +3258,7 @@ elem* toElem(Expression e, ref IRState irs)
         assert(ce.e1 && ce.e2);
         elem* inlineCoverage(Expression e)
         {
-            if (!ce.isInlineSequence || !irs.params.cov || !e || !e.loc.linnum || !e.loc.filename)
+            if (!ce.isInlineSequence || !irs.params.cov || !e || !e.isValid)
                 return null;
 
             // Nested inline-sequence commas are accounted for recursively.
