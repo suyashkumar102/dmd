@@ -3258,7 +3258,7 @@ elem* toElem(Expression e, ref IRState irs)
         assert(ce.e1 && ce.e2);
         elem* inlineCoverage(Expression e)
         {
-            if (!ce.isInlineSequence || !irs.params.cov || !e || !e.isValid)
+            if (!ce.isInlineSequence || !irs.params.cov || !e || !e.loc.isValid())
                 return null;
 
             // Nested inline-sequence commas are accounted for recursively.
@@ -3268,22 +3268,8 @@ elem* toElem(Expression e, ref IRState irs)
                     return null;
             }
 
-            if (auto de = e.isDeclarationExp())
-            {
-                auto vd = de.declaration.isVarDeclaration();
-                if (!vd)
-                    return null;
-
-                // Skip synthetic declarations inserted to materialize the inline call.
-                // Parameter copies have STC.IOR or are identified by isParameter on the
-                // original; the this-pointer copy uses Id.This.
-                if (vd.isParameter() || vd.ident == Id.This || (vd.storage_class & STC.temp))
-                    return null;
-
-                const hasInit = vd._init && !vd._init.isVoidInitializer();
-                if (!hasInit && !vd.needsScopeDtor())
-                    return null;
-            }
+            if (e.isDeclarationExp())
+                return null;
 
             return incUsageElem(irs, e.loc);
         }
