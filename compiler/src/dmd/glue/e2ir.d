@@ -3268,9 +3268,6 @@ elem* toElem(Expression e, ref IRState irs)
                     return null;
             }
 
-            if (e.isDeclarationExp())
-                return null;
-
             return incUsageElem(irs, e.loc);
         }
 
